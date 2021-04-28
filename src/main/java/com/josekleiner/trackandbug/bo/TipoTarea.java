@@ -3,8 +3,10 @@ package com.josekleiner.trackandbug.bo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TIPO_TAREAS")
 public class TipoTarea {
 
 	@Id

@@ -1,16 +1,27 @@
 package com.josekleiner.trackandbug.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "USUARIOS")
 public class Usuario {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String nombre;
+	@OneToMany(mappedBy = "usuarioAsignado")
+	private List<Tarea> tareas = new ArrayList<Tarea>();
+	@ManyToOne
+	private Proyecto proyecto;
 	
 	public Long getId() {
 		return id;
@@ -23,6 +34,18 @@ public class Usuario {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public List<Tarea> getTareas() {
+		return tareas;
+	}
+	public void setTareas(List<Tarea> tareas) {
+		this.tareas = tareas;
+	}
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
 	}
 	@Override
 	public int hashCode() {

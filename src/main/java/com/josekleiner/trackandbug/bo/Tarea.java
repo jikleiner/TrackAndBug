@@ -1,21 +1,33 @@
 package com.josekleiner.trackandbug.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TAREAS")
 public class Tarea {
 
 	@Id
 	@GeneratedValue
 	private Long idTarea;
+	private Long duracion;
+	@ManyToOne
 	private TipoTarea tipo;
+	@ManyToOne
 	private EstadoTarea estado;
-	private List<Comentario> comentarios;
+	@OneToMany(mappedBy = "tarea")
+	private List<Comentario> comentarios = new ArrayList<Comentario>();
+	@ManyToOne
 	private Usuario usuarioAsignado;
+	@ManyToOne
+	private Proyecto proyecto;
 	
 	public Long getIdTarea() {
 		return idTarea;
@@ -47,6 +59,20 @@ public class Tarea {
 	public void setUsuarioAsignado(Usuario usuarioAsignado) {
 		this.usuarioAsignado = usuarioAsignado;
 	}
+	
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+	public Long getDuracion() {
+		return duracion;
+	}
+	public void setDuracion(Long duracion) {
+		this.duracion = duracion;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

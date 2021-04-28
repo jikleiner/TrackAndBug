@@ -1,21 +1,31 @@
 package com.josekleiner.trackandbug.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "PROYECTOS")
 public class Proyecto {
 
 	@Id
 	@GeneratedValue
 	private Long idProyecto;
 	private String nombreProyecto;
+	@OneToOne
 	private Usuario UsuarioResponsable;
-	private List<Tarea> tareasProyecto;
+	@OneToMany(mappedBy = "proyecto")
+	private List<Tarea> tareasProyecto = new ArrayList<Tarea>();
+	@OneToMany(mappedBy = "proyecto")
+	private List<Usuario> usuariosAsignados = new ArrayList<Usuario>();
 	private Long horasAsignadas;
+	
 	public Long getIdProyecto() {
 		return idProyecto;
 	}
@@ -40,6 +50,13 @@ public class Proyecto {
 	public void setTareasProyecto(List<Tarea> tareasProyecto) {
 		this.tareasProyecto = tareasProyecto;
 	}
+	public List<Usuario> getUsuariosAsignados() {
+		return usuariosAsignados;
+	}
+	public void setUsuariosAsignados(List<Usuario> usuariosAsignados) {
+		this.usuariosAsignados = usuariosAsignados;
+	}
+	
 	public Long getHorasAsignadas() {
 		return horasAsignadas;
 	}
@@ -75,6 +92,5 @@ public class Proyecto {
 			return false;
 		return true;
 	}
-	
 	
 }
