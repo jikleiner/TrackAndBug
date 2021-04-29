@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.josekleiner.trackandbug.bo.Proyecto;
-import com.josekleiner.trackandbug.bo.Tarea;
 import com.josekleiner.trackandbug.dto.ComentarioDTO;
 import com.josekleiner.trackandbug.dto.ProyectoDTO;
 import com.josekleiner.trackandbug.dto.TareaDTO;
@@ -43,7 +41,7 @@ public class ProyectoRest {
 		return ResponseEntity.ok(proyectos);
 	}
 	@PostMapping
-	public ResponseEntity<Long> altaProyecto(@RequestBody Proyecto proyecto) {
+	public ResponseEntity<Long> altaProyecto(@RequestBody ProyectoDTO proyecto) {
 		proyectoService.altaProyecto(proyecto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(proyecto.getIdProyecto());
 	}
@@ -56,11 +54,11 @@ public class ProyectoRest {
 	//	POST - PUT - GET - DELETE DE TAREAS
 	@PostMapping(path="/{id}/tareas")
 	public ResponseEntity<Long> altaTareas(@PathVariable Long id, @RequestParam Long idTipo, 
-			@RequestParam Long idEstado, @RequestBody Tarea tarea) {
+			@RequestParam Long idEstado, @RequestBody TareaDTO tarea) {
 		TareaDTO tareaRes = tareaService.altaTarea(id, tarea.getDuracion(), idTipo, idEstado);
 		return ResponseEntity.status(HttpStatus.CREATED).body(tareaRes.getIdTarea());
 	}
-	@GetMapping(path="/{id}/tareas/")
+	@GetMapping(path="/{id}/tareas")
 	public ResponseEntity<List<TareaDTO>> verTareasProyecto(@PathVariable Long id) {
 		List<TareaDTO> tareas = tareaService.buscarTareasPorProyecto(id);
 		return ResponseEntity.ok(tareas);	

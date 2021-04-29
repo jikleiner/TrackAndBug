@@ -41,7 +41,7 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public ComentarioDTO cargarComentario(Long idTarea, Long idUsuario, Comentario comentario) {
+	public ComentarioDTO cargarComentario(Long idTarea, Long idUsuario, ComentarioDTO comentario) {
 		Comentario comentarioNuevo = new Comentario();
 		Usuario usuario = usuarioRepository.findById(idUsuario).get();
 		Tarea tarea = tareaRepository.findById(idTarea).get();
@@ -61,9 +61,11 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Long altaUsuario(Usuario usuario) {
-		usuarioRepository.save(usuario);
-		return usuario.getId();
+	public Long altaUsuario(UsuarioDTO usuario) {
+		Usuario usuarioNuevo = new Usuario();
+		usuarioNuevo.setNombre(usuario.getNombre());
+		usuarioRepository.save(usuarioNuevo);
+		return usuarioNuevo.getId();
 	}
 
 	@Override

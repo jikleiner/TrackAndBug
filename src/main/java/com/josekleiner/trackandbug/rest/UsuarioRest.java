@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.josekleiner.trackandbug.bo.Comentario;
-import com.josekleiner.trackandbug.bo.Usuario;
 import com.josekleiner.trackandbug.dto.ComentarioDTO;
 import com.josekleiner.trackandbug.dto.TareaDTO;
 import com.josekleiner.trackandbug.dto.UsuarioDTO;
@@ -39,19 +37,20 @@ public class UsuarioRest {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Long> altaUsuario(@RequestBody Usuario usuario){
+	public ResponseEntity<Long> altaUsuario(@RequestBody UsuarioDTO usuario){
 		usuarioService.altaUsuario(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuario.getId());
 	}
 	
-	@GetMapping(path = "/{id}/tareas")
+	@GetMapping(path = "/{id}tareas")
 	public ResponseEntity<List<TareaDTO>> verTareasUsuario(@PathVariable Long id){
 		List<TareaDTO> tareas = usuarioService.verTareas(id);
 		return ResponseEntity.ok(tareas);
 	}
-	@PostMapping(path = "/{idUsuario}/tareas/{idTarea}/cargarcomentario")
+	
+	@PostMapping(path = "/{idUsuario}tareas{idTarea}/cargarcomentario")
 	public ResponseEntity<ComentarioDTO> cargarComentarioTareaUsuario(@PathVariable Long idUsuario, 
-			@PathVariable Long idTarea, @RequestBody Comentario comentario){
+			@PathVariable Long idTarea, @RequestBody ComentarioDTO comentario){
 		ComentarioDTO comment = usuarioService.cargarComentario(idTarea, idUsuario, comentario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(comment);
 	}

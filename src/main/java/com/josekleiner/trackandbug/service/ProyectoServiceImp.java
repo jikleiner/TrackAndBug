@@ -26,13 +26,16 @@ public class ProyectoServiceImp implements ProyectoService {
 	private UsuarioRepository usuarioRepository;
 	
 	@Override
-	public Long altaProyecto(Proyecto pro) {
-		proyectoRepository.save(pro);
-		return pro.getIdProyecto();
+	public Long altaProyecto(ProyectoDTO pro) {
+		Proyecto proyecto = new Proyecto();
+		proyecto.setHorasAsignadas(pro.getHorasAsignadas());
+		proyecto.setNombreProyecto(pro.getNombreProyecto());
+		proyectoRepository.save(proyecto);
+		return proyecto.getIdProyecto();
 	}
 
 	@Override
-	public List<TareaDTO> verTareasProyecto(Long idProyecto) {
+	public List<TareaDTO> verTareasProyecto(Long idProyecto) { // cambiar dto por bo
 		Proyecto proyecto = proyectoRepository.findById(idProyecto).get();
 		List<TareaDTO> tareas = new ArrayList<TareaDTO>();
 		for (Tarea tarea : proyecto.getTareasProyecto()) {
