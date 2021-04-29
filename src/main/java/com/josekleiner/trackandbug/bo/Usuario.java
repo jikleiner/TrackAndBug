@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,8 +20,8 @@ public class Usuario {
 	private String nombre;
 	@OneToMany(mappedBy = "usuarioAsignado")
 	private List<Tarea> tareas = new ArrayList<Tarea>();
-	@ManyToOne
-	private Proyecto proyecto;
+	@ManyToMany(mappedBy = "usuarios")
+	private List<Proyecto> proyectos = new ArrayList<Proyecto>();
 	
 	public Long getId() {
 		return id;
@@ -41,11 +41,12 @@ public class Usuario {
 	public void setTareas(List<Tarea> tareas) {
 		this.tareas = tareas;
 	}
-	public Proyecto getProyecto() {
-		return proyecto;
+
+	public List<Proyecto> getProyectos() {
+		return proyectos;
 	}
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
+	public void setProyectos(List<Proyecto> proyectos) {
+		this.proyectos = proyectos;
 	}
 	@Override
 	public int hashCode() {

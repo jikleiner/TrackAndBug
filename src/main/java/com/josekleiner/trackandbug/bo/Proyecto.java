@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,8 +23,8 @@ public class Proyecto {
 	private Usuario UsuarioResponsable;
 	@OneToMany(mappedBy = "proyecto")
 	private List<Tarea> tareasProyecto = new ArrayList<Tarea>();
-	@OneToMany(mappedBy = "proyecto")
-	private List<Usuario> usuariosAsignados = new ArrayList<Usuario>();
+	@ManyToMany
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	private Long horasAsignadas;
 	
 	public Long getIdProyecto() {
@@ -50,13 +51,13 @@ public class Proyecto {
 	public void setTareasProyecto(List<Tarea> tareasProyecto) {
 		this.tareasProyecto = tareasProyecto;
 	}
-	public List<Usuario> getUsuariosAsignados() {
-		return usuariosAsignados;
-	}
-	public void setUsuariosAsignados(List<Usuario> usuariosAsignados) {
-		this.usuariosAsignados = usuariosAsignados;
-	}
 	
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 	public Long getHorasAsignadas() {
 		return horasAsignadas;
 	}

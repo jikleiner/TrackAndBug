@@ -6,7 +6,7 @@ public class ProyectoDTO {
 
 	private Long idProyecto;
 	private String nombreProyecto;
-	private Long usuarioResponsableId;
+	private Long usuarioResponsableId; // meter usuarioDTO
 	private String usuarioResponsableNombre;
 	private Long horasAsignadas;
 	
