@@ -75,4 +75,9 @@ public class ProyectoRest {
 		List<ComentarioDTO> comentarios = tareaService.mostrarComentariosDeTarea(idTarea);
 		return ResponseEntity.ok(comentarios);
 	}
+	@GetMapping(path="/{idProyecto}/tiempo")
+	public ResponseEntity<Long> mostrarTiempoProyecto(@PathVariable Long idProyecto){
+		Long res = proyectoService.verHorasAsignadasProyecto(idProyecto);
+		return ResponseEntity.ok(res);
+	}
 }

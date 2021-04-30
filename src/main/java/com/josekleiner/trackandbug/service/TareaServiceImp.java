@@ -94,13 +94,15 @@ public class TareaServiceImp implements TareaService {
 		return retorno;
 	}
 	@Override
-	public void modificarEstadoTarea(Long idTarea, Long idEstado) {
+	public TareaDTO modificarEstadoTarea(Long idTarea, Long idEstado) {
 		Tarea tarea = tareaRepository.findById(idTarea).get();
 		// BUSQUEDA DEL ESTADO DE TAREA POR ID
 		EstadoTarea estado = estadoRepository.findById(idEstado).get();
 		// SET Y SAVE
 		tarea.setEstado(estado);
 		tareaRepository.save(tarea);
+		TareaDTO tareaSave = new TareaDTO(tarea);
+		return tareaSave;
 	}
 	@Override
 	public List<TareaDTO> buscarTareasPorProyecto(Long idProyecto) {
@@ -125,6 +127,16 @@ public class TareaServiceImp implements TareaService {
 		}
 		return resultado;
 	}
+	
+	@Override
+	public TareaDTO asignarUsuarioATarea(Long idTarea, Long idUsuario) {
+		Tarea tarea = tareaRepository.findById(idTarea).get();
+		Usuario usuario = usuarioRepository.findById(idUsuario).get();
+		tarea.setUsuarioAsignado(usuario);
+		tareaRepository.save(tarea);
+		TareaDTO tareaMod = new TareaDTO(tarea);
+		return tareaMod;
+	}
 
 	@Override
 	public List<ComentarioDTO> mostrarComentariosDeTarea(Long idTarea) {
@@ -135,6 +147,17 @@ public class TareaServiceImp implements TareaService {
 			CommRes.add(new ComentarioDTO(comentario));
 		}
 		return CommRes;
+	}
+
+	@Override
+	public List<TareaDTO> mostrarTareas() {
+		// TODO Auto-generated method stub
+		Iterable<Tarea> tareas = tareaRepository.findAll();
+		List<TareaDTO> tareasRes = new ArrayList<TareaDTO>();
+		for (Tarea tarea : tareas) {
+			tareasRes.add(new TareaDTO(tarea));
+		}
+		return tareasRes;
 	}
 	
 }
