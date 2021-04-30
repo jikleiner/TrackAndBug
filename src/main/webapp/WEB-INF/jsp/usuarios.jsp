@@ -1,19 +1,27 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Track & Bug - Usuarios</title>
-<br/>
+<br></br>
 </head>
 <body>
 <h1>Panel Usuarios</h1>
-Ingrese su ID de Usuario:
-<form action="users" method="GET">
-	<input type="long" name="id" />
-</form>
-<br/>
-<form action="users" method="GET">
-	<input type="submit" value="Ver Todos los usuarios" />
-</form>
+<table border="1" width="50%">
+  <tr>
+  	<th>&nbsp;</th>
+    <th>ID USUARIO</th>
+    <th>NOMBRE DE USUARIO</th>
+  </tr>
+	<c:forEach items="${usuarios}" var="u">
+	    <tr>
+	    	<td></td>
+	    	<td>${u.id}</td>
+  		  	<td>${u.nombre}</td>
+  		</tr>
+	</c:forEach>
+</table> 
+
 </body>
 </html>

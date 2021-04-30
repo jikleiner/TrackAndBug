@@ -31,11 +31,11 @@ public class UsuarioServiceImp implements UsuarioService {
 	private TareaRepository tareaRepository;
 
 	@Override
-	public List<UsuarioDTO> mostrarUsuarios() {
-		List<UsuarioDTO> usuarios = new ArrayList<UsuarioDTO>();
+	public List<Usuario> mostrarUsuarios() {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 		Iterable<Usuario> lista = usuarioRepository.findAll();
 		for (Usuario usuario : lista) {
-			usuarios.add(new UsuarioDTO(usuario));
+			usuarios.add(usuario);
 		}
 		return usuarios;
 	}

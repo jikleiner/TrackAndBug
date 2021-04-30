@@ -1,5 +1,6 @@
 package com.josekleiner.trackandbug.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.josekleiner.trackandbug.bo.Proyecto;
 import com.josekleiner.trackandbug.dto.ComentarioDTO;
 import com.josekleiner.trackandbug.dto.ProyectoDTO;
 import com.josekleiner.trackandbug.dto.TareaDTO;
@@ -37,8 +39,12 @@ public class ProyectoRest {
 	}
 	@GetMapping
 	public ResponseEntity<List<ProyectoDTO>> buscarProyectos() {
-		List<ProyectoDTO> proyectos = proyectoService.buscarProyectos();
-		return ResponseEntity.ok(proyectos);
+		List<Proyecto> proyectos = proyectoService.buscarProyectos();
+		List<ProyectoDTO> proyectosRes = new ArrayList<ProyectoDTO>();
+		for (Proyecto proyecto : proyectos) {
+			proyectosRes.add(new ProyectoDTO(proyecto));
+		}
+		return ResponseEntity.ok(proyectosRes);
 	}
 	@PostMapping
 	public ResponseEntity<Long> altaProyecto(@RequestBody ProyectoDTO proyecto) {

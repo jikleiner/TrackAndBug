@@ -2,12 +2,13 @@ package com.josekleiner.trackandbug.service;
 
 import java.util.List;
 
+import com.josekleiner.trackandbug.bo.Tarea;
 import com.josekleiner.trackandbug.dto.ComentarioDTO;
 import com.josekleiner.trackandbug.dto.TareaDTO;
 
 public interface TareaService {
 
-	public List<TareaDTO> mostrarTareas();
+	public List<Tarea> mostrarTareas();
 	public TareaDTO altaTarea(Long idProyecto, Long duracion, Long idTipo, Long idEstado);
 	public Long quitarTareaProyecto(Long idTarea, Long idProyecto);// ver si cabe sacarlo
 	public TareaDTO buscarTareaPorId(Long idTarea);

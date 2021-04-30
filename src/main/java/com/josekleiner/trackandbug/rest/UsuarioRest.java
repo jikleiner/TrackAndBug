@@ -1,5 +1,6 @@
 package com.josekleiner.trackandbug.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.josekleiner.trackandbug.bo.Usuario;
 import com.josekleiner.trackandbug.dto.ComentarioDTO;
 import com.josekleiner.trackandbug.dto.TareaDTO;
 import com.josekleiner.trackandbug.dto.UsuarioDTO;
@@ -26,8 +28,12 @@ public class UsuarioRest {
 	
 	@GetMapping
 	public ResponseEntity<List<UsuarioDTO>> buscarUsuarios(){
-		List<UsuarioDTO> usuarios = usuarioService.mostrarUsuarios();
-		return ResponseEntity.ok(usuarios);
+		List<Usuario> usuarios = usuarioService.mostrarUsuarios();
+		List<UsuarioDTO> usuariosRes = new ArrayList<UsuarioDTO>();
+		for (Usuario usuario : usuarios) {
+			usuariosRes.add(new UsuarioDTO(usuario));
+		}
+		return ResponseEntity.ok(usuariosRes);
 	}
 	
 	@GetMapping(path = "/{id}")

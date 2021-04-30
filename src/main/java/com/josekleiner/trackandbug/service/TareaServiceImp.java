@@ -150,12 +150,12 @@ public class TareaServiceImp implements TareaService {
 	}
 
 	@Override
-	public List<TareaDTO> mostrarTareas() {
+	public List<Tarea> mostrarTareas() {
 		// TODO Auto-generated method stub
 		Iterable<Tarea> tareas = tareaRepository.findAll();
-		List<TareaDTO> tareasRes = new ArrayList<TareaDTO>();
+		List<Tarea> tareasRes = new ArrayList<Tarea>();
 		for (Tarea tarea : tareas) {
-			tareasRes.add(new TareaDTO(tarea));
+			tareasRes.add(tarea);
 		}
 		return tareasRes;
 	}

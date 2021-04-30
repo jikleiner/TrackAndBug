@@ -59,13 +59,13 @@ public class ProyectoServiceImp implements ProyectoService {
 	}
 	
 	@Override
-	public List<ProyectoDTO> buscarProyectos() {
+	public List<Proyecto> buscarProyectos() {
 		Iterable<Proyecto> resultado = proyectoRepository.findAll();
-		List<ProyectoDTO> proyectos = new ArrayList<ProyectoDTO>();
+		List<Proyecto> resultado2 = new ArrayList<Proyecto>();
 		for (Proyecto proyecto : resultado) {
-			proyectos.add(new ProyectoDTO(proyecto));
+			resultado2.add(proyecto);
 		}
-		return proyectos;
+		return resultado2;
 	}
 	
 	@Override
